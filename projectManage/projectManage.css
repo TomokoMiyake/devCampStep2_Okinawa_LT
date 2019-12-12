@@ -1,0 +1,53 @@
+@charset "UTF-8";
+/*電光掲示板柄*/
+.board {
+  width: 100%;
+  height: 55px;
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  background-color: #000000;
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto 20px;
+  padding: 5px 0;
+  color: #00FF00;
+}
+
+/* マーキーの内容部分の高さ確保 */
+.board::after {
+  content: "";
+  white-space: nowrap;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(#0a0600 1px, transparent 0px), linear-gradient(0, #0a0600 1px, transparent 1px);
+  background-image: -webkit-linear-gradient(#0a0600 1px, transparent 0px), -webkit-linear-gradient(0, #0a0600 1px, transparent 1px);
+  background-size: 2px 2px;
+  z-index: 10;
+}
+/* マーキーさせたい部分(内側) */
+.board > .board-inner {
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+  animation-name: marquee;
+  animation-timing-function: linear;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+}
+/* マウスオーバーでマーキーストップ */
+.board > .board-inner:hover {
+  animation-play-state: paused;
+  cursor: default;
+}
+/** マーキーアニメーション */
+@keyframes marquee {
+  0% { left: 100%; transform: translate(0); }
+  100% { left: 0; transform: translate(-100%); }
+}
